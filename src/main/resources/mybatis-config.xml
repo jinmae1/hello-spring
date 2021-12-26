@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+  <settings>
+  	<!-- javaType -> jdbcType : null값을 null로 처리 -->
+  	<setting name="jdbcTypeForNull" value="NULL"/>
+  	<!-- db:column_name -> java:columnName -->
+  	<setting name="mapUnderscoreToCamelCase" value="true"/>
+  </settings>
+  
+  <typeAliases>
+  	<!-- <typeAlias type="com.kh.student.model.vo.Student" alias="student"/> -->
+  	<!-- 해당패키지 하위의 모든 클래스가 소문자로 시작하는 별칭으로 등록된다. -->
+  	<package name="com.kh.spring"/>
+  </typeAliases>
+  
+</configuration>

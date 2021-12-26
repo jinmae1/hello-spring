@@ -9,20 +9,24 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
+	<!-- mvc관련 bean(@Controller, @Service, @Repository...) 솰성화 -->
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
+	<!-- 정적파일에 대한 매핑처리 -->
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
+	<!-- controller에서 리턴한 viewName을 가지고, 접두/접미사를 붙여서 view단을 찾아주는 bean -->
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- basepackage 하위의 클래스를 대상으로 annotation 활성화: @Component @Autowired -->
 	<context:component-scan base-package="com.kh.spring" />
-	
+
 	
 	
 </beans:beans>
