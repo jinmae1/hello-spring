@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring.member.model.service.MemberService;
@@ -37,6 +38,27 @@ public class MemberController {
 		return "member/memberLogin";
 	}
 	
+	@PostMapping("/memberLogin.do")
+	public String memberLogin(
+			@RequestParam String id,
+			@RequestParam String password,
+			RedirectAttributes redirectAttr
+	) {
+		// 인증
+		Member member = memberService.selectOneMember(id);
+		log.info("member = {}", member);
+		
+		if(member != null && bCryptPasswordEncoder.matches(password, member.getPassword())) {
+			// 로그인 성공 시
+			redirectAttr.addFlashAttribute("msg", "로그인 성공!");
+		} else {
+			// 로그인 실패 시
+			redirectAttr.addFlashAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
+		}
+
+		return "redirect:/";
+	}
+
 	@GetMapping("/memberEnroll.do")
 	public String memberEnroll() {
 		return "member/memberEnroll";
