@@ -3,6 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="demo">
+	<!--
+		#{lang, typehandler=stringArray2VarcharTypeHandler}
+		typeHandler.java에 @MappedTypes @mappedJdbcType 선언 시 위 문장을 생략하고 #{lang}으로만 사용가능
+	-->
 	<insert id="insertDev">
 		insert into
 			dev
@@ -12,7 +16,7 @@
 			#{career},
 			#{email},
 			#{gender},
-			<foreach collection="lang" item="lng" open="'" close="'" separator=",">${lng}</foreach>
+			#{lang}
 		)
 	</insert>
 </mapper>
