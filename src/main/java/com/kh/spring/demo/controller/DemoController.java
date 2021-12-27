@@ -1,5 +1,8 @@
 package com.kh.spring.demo.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -150,7 +153,18 @@ public class DemoController {
 		String msg = result > 0 ? "Dev 등록 성공!" : "Dev 등록 실패!";
 		log.info("msg = {}", msg);
 		
-		return "redirect:/demo/devForm.do";
+		return "redirect:/demo/devList.do";
+	}
+	
+	@RequestMapping("/demo/devList.do")
+	public String devList(Model model) {
+		log.info("[DemoController] devList.do");
+		List<Dev> list = demoService.selectDevList();
+		log.info("list = {}", list);
+		
+		model.addAttribute("list", list);
+
+		return "demo/devList";
 	}
 	
 }
