@@ -19,6 +19,7 @@
 
 <!-- 사용자작성 css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" />
+<%-- RedirectAttributes가 session에 저장한 msg를 꺼내서 출력(바로 제거) --%>
 <c:if test="${not empty msg}">
 	<script>
 		alert("${msg}");

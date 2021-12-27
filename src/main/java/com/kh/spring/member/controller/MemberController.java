@@ -41,9 +41,12 @@ public class MemberController {
 	@PostMapping("/memberEnroll.do")
 	public String memberEnroll(Member member, RedirectAttributes redirectAttr) {
 		log.info("member = {}", member);
+		
+		int result = memberService.insertMember(member);
 
 		// RedirectAttributes: 리다이렉트 후에 session의 속성을 참조할 수 있도록 한다.
-		redirectAttr.addFlashAttribute("msg", "회원 가입 성공!");
+		redirectAttr.addFlashAttribute("msg", result > 0 ? "회원 가입 성공!" : "회원 가입 실패!");
+		
 		return "redirect:/";
 	}
 	
