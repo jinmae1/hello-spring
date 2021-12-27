@@ -1,7 +1,13 @@
 package com.kh.spring.member.controller;
 
+import java.beans.PropertyEditor;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,8 +42,18 @@ public class MemberController {
 	public String memberEnroll(Member member, RedirectAttributes redirectAttr) {
 		log.info("member = {}", member);
 
+		// RedirectAttributes: 리다이렉트 후에 session의 속성을 참조할 수 있도록 한다.
+		redirectAttr.addFlashAttribute("msg", "회원 가입 성공!");
 		return "redirect:/";
 	}
 	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		// boolean allowEmpty - true, 빈문자열 ""인 경우 null 반환(아래 CustomDateEditor 생성자의 두번째 인자)
+		PropertyEditor editor = new CustomDateEditor(sdf, true);
+		// java.util.Date 변환 시, 해당 editor 객체 사용
+		binder.registerCustomEditor(Date.class, editor);
+	}
 	
 }
