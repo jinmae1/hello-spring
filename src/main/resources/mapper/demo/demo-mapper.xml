@@ -19,5 +19,14 @@
 			#{lang}
 		)
 	</insert>
+	
+	<select id="selectDevList" resultType="dev">
+		select
+			*
+		from
+			dev
+		order by
+			no desc
+	</select>
 </mapper>
 
