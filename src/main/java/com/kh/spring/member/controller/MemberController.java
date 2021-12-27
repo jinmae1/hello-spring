@@ -6,6 +6,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,9 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 //	@RequestMapping(value="/memberLogin.do", method=RequestMethod.GET)
 	@GetMapping("/memberLogin.do")
 	public String memberLogin() {
@@ -41,6 +45,11 @@ public class MemberController {
 	@PostMapping("/memberEnroll.do")
 	public String memberEnroll(Member member, RedirectAttributes redirectAttr) {
 		log.info("member = {}", member);
+		// 비밀번호 암호화 처리
+		String rawPassword = member.getPassword(); // 평문
+		// 랜덤 salt값을 이용한 hashing 처리
+		String encodedPassword = bCryptPasswordEncoder.encode(rawPassword); // 암호화처리
+		member.setPassword(encodedPassword);
 		
 		int result = memberService.insertMember(member);
 
