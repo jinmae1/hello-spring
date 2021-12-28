@@ -44,12 +44,14 @@ public class MemberController {
 	// referer required false는 referer가 없는 경우(가령, 직접 주소 복붙해서 들어온 경우)
 	public String memberLogin(
 			@RequestHeader(name="Referer", required=false) String referer,
+			@SessionAttribute(required=false) String next,
 			Model model
 	) {
 		log.info("referer = {}", referer);
 		
-		model.addAttribute("next", referer);
-
+		if(next == null)
+			model.addAttribute("next", referer);
+		
 		return "member/memberLogin";
 	}
 	

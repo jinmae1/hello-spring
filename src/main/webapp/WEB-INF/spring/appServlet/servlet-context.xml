@@ -33,6 +33,14 @@
 			<mapping path="/**/"/>
 			<beans:bean class="com.kh.spring.common.interceptor.LogInterceptor" id="logInterceptor"/>
 		</interceptor>
+		<interceptor>
+			<!-- <mapping path="/demo/devList.do"/> -->
+			<!-- 위에 처럼 하나만 지정하거나, 아래처럼 전체지정 후 exclude 하는 방법 중 택1 -->
+			<mapping path="/demo/**"/>
+			<exclude-mapping path="/demo/devForm.do"/>
+			<exclude-mapping path="/demo/devF*.do"/>
+			<beans:bean class="com.kh.spring.common.interceptor.LoginCheckInterceptor" id="LoginCheckInterceptor"></beans:bean>
+		</interceptor>
 	</interceptors>
 
 	
