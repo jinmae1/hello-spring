@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring.member.model.service.MemberService;
@@ -63,6 +64,16 @@ public class MemberController {
 			redirectAttr.addFlashAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
 		}
 
+		return "redirect:/";
+	}
+	
+	@GetMapping("/memberLogout.do")
+	public String memberLogout(SessionStatus sessionStatus) {
+		
+		// 현재 세션객체의 사용완료 설정 - 세션속성등 내부 초기화, 세션객체는 재사용
+		if(!sessionStatus.isComplete())
+			sessionStatus.setComplete();
+		
 		return "redirect:/";
 	}
 
