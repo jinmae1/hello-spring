@@ -9,6 +9,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -76,7 +77,6 @@ public class MemberController {
 			// next값을 location으로 등록
 			log.info("next = {}", next);
 			location = next;
-			model.addAttribute("next", null); // removeAttribute 처리
 
 		} else {
 			// 로그인 실패 시
@@ -87,7 +87,9 @@ public class MemberController {
 	}
 	
 	@GetMapping("/memberLogout.do")
-	public String memberLogout(SessionStatus sessionStatus) {
+	public String memberLogout(SessionStatus sessionStatus, ModelMap model) {
+		
+		model.clear(); // 관리되는 model속성 완전 제거. url의 parameter로 붙는 문제 처리
 		
 		// 현재 세션객체의 사용완료 설정 - 세션속성등 내부 초기화, 세션객체는 재사용
 		if(!sessionStatus.isComplete())
