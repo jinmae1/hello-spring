@@ -10,12 +10,23 @@
 	<context:property-placeholder location="classpath:/datasource.properties"/>
 
 	<!-- #6.1. datasource bean & mybatis bean 등록 -->
-	<bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource" destroy-method="close">
+	<bean class="org.apache.commons.dbcp.BasicDataSource" id="realDataSource" destroy-method="close">
 		<property name="driverClassName" value="${datasource.driverClassName}"/>
 		<property name="url" value="${datasource.url}"/>
 		<property name="username" value="${datasource.username}"/>
 		<property name="password" value="${datasource.password}"/>
 	</bean>
+	
+	<!-- #9.1. log4jdbc ProxyDataSource Bean 설정 -->
+	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">  
+            <constructor-arg ref="realDataSource" />
+            <property name="logFormatter">
+                <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">    
+                    <property name="loggingType" value="MULTI_LINE" />
+                    <property name="sqlPrefix" value="[SQL] " />
+                </bean>
+            </property>
+        </bean>
 	
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
