@@ -20,5 +20,14 @@
 			default
 		)
 	</insert>
+	
+	<select id="selectOneMember" resultType="member">
+		select
+			*
+		from
+			member
+		where id = #{id}
+		order by enroll_date asc
+	</select>
 </mapper>
 
