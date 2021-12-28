@@ -82,8 +82,9 @@
 					<artifactId>jmxri</artifactId>
 				</exclusion>
 			</exclusions>
-			<scope>runtime</scope>
+			<!-- <scope>runtime</scope> -->
 		</dependency>
+		<!-- -2번째 라인에 보이는 scope태그의 기본값은 compile이고 runtime, provided 등의 값 등이 있음 -->
 
 		<!-- @Inject -->
 		<dependency>
@@ -177,6 +178,13 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 	        <version>${org.springframework.security-version}</version>		
+		</dependency>
+		
+		<!-- #9. log4jdbc-remix -->
+		<dependency>
+			<groupId>org.lazyluke</groupId>
+			<artifactId>log4jdbc-remix</artifactId>
+			<version>0.2.7</version>
 		</dependency>
 		
 	</dependencies>
