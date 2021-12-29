@@ -56,12 +56,18 @@ public class MemoController {
 	
 	@PostMapping("/insertMemo.do")
 	public String insertMemo(Memo memo, RedirectAttributes redirectAttr) {
-		log.debug("memo = {}", memo);
-		int result = memoService.insertMemo(memo);
-		String msg = "메모 등록 성공!";
-		redirectAttr.addFlashAttribute("msg", msg);
-		
-		return "redirect:/memo/memo.do";
+
+		try {
+			log.debug("memo = {}", memo);
+			int result = memoService.insertMemo(memo);
+			String msg = "메모 등록 성공!";
+			redirectAttr.addFlashAttribute("msg", msg);
+			
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw e; // spring container이 처리하도록 throw(위임, 전달)
+		}
+			return "redirect:/memo/memo.do";
 	}
 	
 	@InitBinder
