@@ -47,7 +47,7 @@ public class MemoController {
 
 	@GetMapping("/memo.do")
 	public void memo(Model model) {
-		log.info("[MemoController] memo.do");
+		log.debug("컨트롤러 주업무");
 		List<Memo> list = memoService.selectMemoList();
 		log.info("list = {}", list);
 		

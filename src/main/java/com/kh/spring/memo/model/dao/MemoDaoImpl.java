@@ -8,7 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.memo.model.vo.Memo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Repository
+@Slf4j
 public class MemoDaoImpl implements MemoDao {
 	
 	@Autowired
@@ -21,6 +24,7 @@ public class MemoDaoImpl implements MemoDao {
 
 	@Override
 	public List<Memo> selectMemoList() {
+		log.debug("Dao 주업무");
 		return session.selectList("memo.selectMemoList");
 	}
 
