@@ -9,7 +9,7 @@
 	
 	<aop:config>
 		<aop:aspect id="logAspect" ref="logAspect">
-			<aop:pointcut expression="execution(* com.kh.spring.memo..*(..))" id="memoPointcut"/>
+			<aop:pointcut expression="execution(* com.kh.spring.memo.model.service..*(..))" id="memoPointcut"/>
 			<aop:around method="aroundAdvice" pointcut-ref="memoPointcut"/>
 		</aop:aspect>
 	</aop:config>
