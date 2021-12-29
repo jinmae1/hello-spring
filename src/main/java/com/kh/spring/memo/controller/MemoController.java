@@ -1,8 +1,23 @@
 package com.kh.spring.memo.controller;
 
+import java.beans.PropertyEditor;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.kh.spring.memo.model.service.MemoService;
+import com.kh.spring.memo.model.vo.Memo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,6 +25,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/memo")
 @Slf4j
 public class MemoController {
+	
+	@Autowired
+	private MemoService memoService;
 	
 	/*
 	@GetMapping("/memo.do")
@@ -28,8 +46,31 @@ public class MemoController {
 	 */
 
 	@GetMapping("/memo.do")
-	public void memo() {
-
+	public void memo(Model model) {
+		log.info("[MemoController] memo.do");
+		List<Memo> list = memoService.selectMemoList();
+		log.info("list = {}", list);
+		
+		model.addAttribute("list", list);
+	}
+	
+	@PostMapping("/insertMemo.do")
+	public String insertMemo(Memo memo, RedirectAttributes redirectAttr) {
+		log.debug("memo = {}", memo);
+		int result = memoService.insertMemo(memo);
+		String msg = "메모 등록 성공!";
+		redirectAttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:/memo/memo.do";
+	}
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		// boolean allowEmpty - true, 빈문자열 ""인 경우 null 반환(아래 CustomDateEditor 생성자의 두번째 인자)
+		PropertyEditor editor = new CustomDateEditor(sdf, true);
+		// java.util.Date 변환 시, 해당 editor 객체 사용
+		binder.registerCustomEditor(Date.class, editor);
 	}
 	
 }

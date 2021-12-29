@@ -20,12 +20,24 @@ div#memo-container{width:60%; margin:0 auto;text-align:center;}
     <br />
     <!-- 메모목록 -->
 	<table class="table">
-	    <tr>
-	      <th>번호</th>
-	      <th>메모</th>
-	      <th>날짜</th>
-	      <th>삭제</th>
-	    </tr>
+		<thead>
+			<tr>
+			  <th>번호</th>
+			  <th>메모</th>
+			  <th>날짜</th>
+			  <th>삭제</th>
+			</tr>
+	    </thead>
+	    <tbody>
+		<c:forEach items="${list}" var="memo">
+	    	<tr>
+	    		<td>${memo.no}</td>	
+	    		<td>${memo.memo}</td>	
+	    		<td><fmt:formatDate value="${memo.regDate}" pattern="yyyy/MM/dd HH:mm"/></td>	
+				<td><button class="btn btn-outline-danger" type="button" >삭제</button></td>
+	    	</tr>	
+		</c:forEach>
+	    </tbody>
 	</table>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
