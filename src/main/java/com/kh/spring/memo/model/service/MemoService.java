@@ -12,4 +12,6 @@ public interface MemoService {
 
 	int deleteMemo(int no);
 
+	Memo selectOneMemo(int no);
+
 }

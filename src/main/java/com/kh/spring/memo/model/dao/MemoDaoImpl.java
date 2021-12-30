@@ -33,4 +33,9 @@ public class MemoDaoImpl implements MemoDao {
 		return session.delete("memo.deleteMemo", no);
 	}
 
+	@Override
+	public Memo selectOneMemo(int no) {
+		return session.selectOne("memo.selectOneMemo", no);
+	}
+
 }
