@@ -28,4 +28,9 @@ public class MemoServiceImpl implements MemoService{
 		return memoDao.selectMemoList();
 	}
 
+	@Override
+	public int deleteMemo(int no) {
+		return memoDao.deleteMemo(no);
+	}
+
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring.memo.model.service.MemoService;
@@ -74,6 +75,21 @@ public class MemoController {
 			throw e; // spring container이 처리하도록 throw(위임, 전달)
 		}
 			return "redirect:/memo/memo.do";
+	}
+	
+	@PostMapping("/deleteMemo.do")
+//	public String deleteMemo(Memo memo, RedirectAttributes redirectAttr) { // 이렇게하면 편하지만 required=true가 필요할 경우 아래처럼 하는 게 좋다.
+	public String deleteMemo(
+			@RequestParam int no,
+			@RequestParam String password,
+			RedirectAttributes redirectAttr) { 
+		
+		int result = memoService.deleteMemo(no);
+		String msg = "삭제 성공!";
+		redirectAttr.addFlashAttribute("msg", msg);
+
+		return "redirect:/memo/memo.do";
+		
 	}
 	
 	@InitBinder
