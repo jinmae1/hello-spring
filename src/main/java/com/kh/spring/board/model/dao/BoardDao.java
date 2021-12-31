@@ -3,6 +3,7 @@ package com.kh.spring.board.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.spring.board.model.vo.Attachment;
 import com.kh.spring.board.model.vo.Board;
 
 public interface BoardDao {
@@ -12,5 +13,7 @@ public interface BoardDao {
 	int selectTotalContent();
 
 	int insertBoard(Board board);
+
+	int insertAttachment(Attachment attach);
 
 }

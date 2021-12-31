@@ -45,8 +45,16 @@
 			<exclude-mapping path="/demo/dev3.do"/>
 			<beans:bean class="com.kh.spring.common.interceptor.LoginCheckInterceptor" id="LoginCheckInterceptor"></beans:bean>
 		</interceptor>
+		
 	</interceptors>
 
+	<!-- #11.1. 파일 업로드 처리용 bean 등록 -->
+	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+	<!-- 한요청당 최대업로드크기 : 50mb(50 * 1024 * 1024) -->
+	<beans:property name="maxUploadSize" value="52428800"/>
+	<!-- 파일 하나당 최대크기 : 10mb(10 * 1024 * 1024) -->
+	<beans:property name="maxUploadSizePerFile" value="10485760"/>
+	</beans:bean>
 	
 	
 </beans:beans>

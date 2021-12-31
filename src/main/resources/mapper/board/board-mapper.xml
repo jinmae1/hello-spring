@@ -20,7 +20,7 @@
 			board
 	</select>
 	
-	<insert id="insertBoard">
+	<insert id="insertBoard" parameterType="board">
 		insert into
 			board(no, title, member_id, content)
 		values(
@@ -28,6 +28,22 @@
 			#{title},
 			#{memberId},
 			#{content}
+		)
+		<selectKey order="AFTER" resultType="_int" keyProperty="no">
+			select
+				seq_board_no.currval
+			from dual
+		</selectKey>
+	</insert>
+	
+	<insert id="insertAttachment">
+		insert into
+			attachment(no, board_no, original_filename, renamed_filename)
+		values(
+			seq_attachment_no.nextval,
+			#{boardNo},
+			#{originalFilename},
+			#{renamedFilename}
 		)
 	</insert>
 </mapper>

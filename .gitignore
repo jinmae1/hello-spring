@@ -156,3 +156,4 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/windows,linux,java,maven,eclipse
 
 src/main/resources/datasource.properties
+src/main/webapp/resources/upload/board/
