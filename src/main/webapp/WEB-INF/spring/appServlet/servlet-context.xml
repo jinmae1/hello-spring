@@ -37,6 +37,8 @@
 			<!-- <mapping path="/demo/devList.do"/> -->
 			<!-- 위에 처럼 하나만 지정하거나, 아래처럼 전체지정 후 exclude 하는 방법 중 택1 -->
 			<mapping path="/demo/**"/>
+			<mapping path="/board/**"/>
+			<exclude-mapping path="/board/boardList.do"/>
 			<exclude-mapping path="/demo/devForm.do"/>
 			<exclude-mapping path="/demo/dev1.do"/>
 			<exclude-mapping path="/demo/dev2.do"/>

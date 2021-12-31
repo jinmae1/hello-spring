@@ -11,4 +11,6 @@ public interface BoardDao {
 
 	int selectTotalContent();
 
+	int insertBoard(Board board);
+
 }

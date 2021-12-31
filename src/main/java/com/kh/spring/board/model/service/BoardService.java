@@ -10,4 +10,6 @@ public interface BoardService {
 	List<Board> selectBoardList(Map<String, Object> param);
 
 	int selectTotalContent();
+
+	int insertBoard(Board board);
 }

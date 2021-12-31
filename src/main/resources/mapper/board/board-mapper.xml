@@ -19,5 +19,16 @@
 		from
 			board
 	</select>
+	
+	<insert id="insertBoard">
+		insert into
+			board(no, title, member_id, content)
+		values(
+			seq_board_no.nextval,
+			#{title},
+			#{memberId},
+			#{content}
+		)
+	</insert>
 </mapper>
 
