@@ -20,4 +20,8 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectBoardList(param);
 	}
 
+	@Override
+	public int selectTotalContent() {
+		return boardDao.selectTotalContent();
+	}
 }
