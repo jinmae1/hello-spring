@@ -10,4 +10,8 @@ public interface MemoDao {
 
 	List<Memo> selectMemoList();
 
+	int deleteMemo(int no);
+
+	Memo selectOneMemo(int no);
+
 }

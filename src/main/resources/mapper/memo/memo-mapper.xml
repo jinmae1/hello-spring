@@ -22,5 +22,22 @@
 		order by
 			no desc
 	</select>
+	
+	<delete id="deleteMemo">
+		delete from
+			memo
+		where
+			no = #{no}
+	</delete>
+	
+	<select id="selectOneMemo" resultType="memo">
+		select
+			*
+		from
+			memo
+		where
+			no = #{no}
+	</select>
+	
 </mapper>
 
