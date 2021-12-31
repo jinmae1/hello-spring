@@ -42,6 +42,13 @@ public class BoardController {
 	@Autowired
 	private ServletContext application;
 	
+	@GetMapping("/boardDetail.do")
+	public void boardDetail(@RequestParam int no, Model model) {
+		Board board = boardService.selectOneBoard(no);
+		log.debug("board = {}", board);
+		model.addAttribute("board", board);
+	}
+	
 	@GetMapping("/boardForm.do")
 	public void boardForm() {}
 	

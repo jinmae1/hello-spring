@@ -42,4 +42,14 @@ public class BoardDaoImpl implements BoardDao {
 		return session.insert("board.insertAttachment", attach);
 	}
 
+	@Override
+	public Board selectOneBoard(int no) {
+		return session.selectOne("board.selectOneBoard", no);
+	}
+
+	@Override
+	public List<Attachment> selectAttachmentListByBoardNo(int boardNo) {
+		return session.selectList("board.selectAttachmentListByBoardNo", boardNo);
+	}
+
 }

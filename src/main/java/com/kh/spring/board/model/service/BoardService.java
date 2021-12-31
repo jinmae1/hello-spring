@@ -15,4 +15,6 @@ public interface BoardService {
 	int insertBoard(Board board);
 	
 	int insertAttachment(Attachment attach);
+
+	Board selectOneBoard(int no);
 }
