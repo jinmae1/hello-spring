@@ -9,4 +9,6 @@ public interface BoardDao {
 
 	List<Board> selectBoardList(Map<String, Object> param);
 
+	int selectTotalContent();
+
 }

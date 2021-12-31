@@ -25,5 +25,10 @@ public class BoardDaoImpl implements BoardDao {
 		
 		return session.selectList("board.selectBoardList", null, rowBounds);
 	}
+	
+	@Override
+	public int selectTotalContent() {
+		return session.selectOne("board.selectTotalContent");
+	}
 
 }
