@@ -78,4 +78,9 @@ public class BoardServiceImpl implements BoardService {
 
 		return board;
 	}
+
+	@Override
+	public Board selectOneBoardCollection(int no) {
+		return boardDao.selectOneBoardCollection(no);
+	}
 }

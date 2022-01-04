@@ -44,7 +44,8 @@ public class BoardController {
 	
 	@GetMapping("/boardDetail.do")
 	public void boardDetail(@RequestParam int no, Model model) {
-		Board board = boardService.selectOneBoard(no);
+//		Board board = boardService.selectOneBoard(no);
+		Board board = boardService.selectOneBoardCollection(no);
 		log.debug("board = {}", board);
 		model.addAttribute("board", board);
 	}

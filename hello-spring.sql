@@ -214,3 +214,10 @@ values(
     seq_attachment_no.nextval, 59, 'sun.jpg', 
     '20200525_020425_345.jpg', default, default, default
 );
+
+
+-- 게시판 첨부파일 join 쿼리
+SELECT b.*, a.*, a.NO attach_no
+FROM board b LEFT JOIN attachment a
+	ON b.NO = a.board_no
+WHERE b.NO = 60;
