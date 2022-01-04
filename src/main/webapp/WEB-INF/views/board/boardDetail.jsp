@@ -36,6 +36,11 @@ div#board-container label.custom-file-label{text-align:left;}
 			첨부파일${vs.count} - ${attach.originalFilename}
 		</a>
 	</c:forEach>
+	<a href="${pageContext.request.contextPath}/board/urlResource.do"
+		role="button" 
+		class="btn btn-outline-success btn-block">
+		UrlResource 확인
+	</a>
 	
     <textarea class="form-control mt-3" name="content" 
     		  placeholder="내용" required>${board.content}</textarea>

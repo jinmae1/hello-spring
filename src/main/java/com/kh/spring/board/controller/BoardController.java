@@ -51,6 +51,20 @@ public class BoardController {
 	
 	@Autowired
 	private ResourceLoader resourceLoader;
+	
+	@GetMapping(
+			value = "/urlResource.do",
+			produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@ResponseBody
+	public Resource urlResource(HttpServletResponse response) {
+		String location = "https://www.w3schools.com/tags/att_a_download.asp";
+		Resource resource = resourceLoader.getResource(location);
+		response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=att_a_download.html");
+		
+		return resource;
+		
+	}
+	
 	/**
 	 * Resource 각 종류별 자원을 처리하기 위한 추상체
 	 * - 웹상의 자원: UrlResource
