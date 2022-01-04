@@ -93,5 +93,14 @@
 			<result column="status" property="status"/>
 		</collection>
 	</resultMap>
+	
+	<select id="selectOneAttachment" resultType="attachment">
+		select
+			*
+		from
+			attachment
+		where
+			no = #{no}
+	</select>
 </mapper>
 

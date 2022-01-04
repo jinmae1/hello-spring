@@ -19,4 +19,6 @@ public interface BoardService {
 	Board selectOneBoard(int no);
 
 	Board selectOneBoardCollection(int no);
+
+	Attachment selectOneAttachment(int no);
 }
