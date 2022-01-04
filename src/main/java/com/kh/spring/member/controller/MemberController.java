@@ -39,6 +39,17 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
+	@GetMapping("/checkIdDuplicate1.do")
+	public String checkIdDuplicate(@RequestParam String id, Model model) {
+		// 아이디 중복검사
+		Member member = memberService.selectOneMember(id);
+		boolean available = (member == null);
+		model.addAttribute("available", available);
+		model.addAttribute("id", id);
+
+		return "jsonView";
+	}
+	
 //	@RequestMapping(value="/memberLogin.do", method=RequestMethod.GET)
 	@GetMapping("/memberLogin.do")
 	// referer required false는 referer가 없는 경우(가령, 직접 주소 복붙해서 들어온 경우)
