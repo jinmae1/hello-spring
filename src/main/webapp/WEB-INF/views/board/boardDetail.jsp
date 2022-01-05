@@ -19,7 +19,7 @@ div#board-container label.custom-file-label{text-align:left;}
 		   value="${board.title}" required>
 	<input type="text" class="form-control" 
 		   name="memberId" 
-		   value="${board.memberId}" readonly required>
+		   value="${board.member.name} (${board.member.id})" readonly required>
 
 	<c:forEach items="${board.attachments}" var="attach" varStatus="vs">
 <%-- 
