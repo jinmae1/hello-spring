@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,6 +72,40 @@ public class MemberController {
 		map.put("serverTime", System.currentTimeMillis());
 
 		return map;
+	}
+	
+	/**
+	 * ResponseEntity
+	 * 	- 응답메시지를 직접 작성. 리턴 객체를 json로 변환 가능 -> @ResponseBody
+	 * 	- 헤더값과 상태코드를 직접 제어
+	 * 	- 생성자를 통해 만들거나, builder 패턴으로 생설할 수 있다.
+	 * 
+	 * 1. status code
+	 * 2. 응답헤더
+	 * 3. 응답메시지 body에 작성할 java 객체
+	 * 
+	 */
+	@GetMapping("/checkIdDuplicate3.do")
+//	public ResponseEntity<Map<String, Object>> checkIdDuplicate3(@RequestParam String id) {
+	public ResponseEntity<?> checkIdDuplicate3(@RequestParam String id) {
+
+		try {
+			Member member = memberService.selectOneMember(id);
+			boolean available = (member == null);
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("id",  id);
+			map.put("available", available);
+			map.put("serverTime", System.currentTimeMillis());
+
+			return ResponseEntity
+					.ok() // ok = 200
+					.header("custom-header", "hello world")
+					.body(map);
+
+		} catch (Exception e) {
+			return ResponseEntity.status(500).build();
+		}
 	}
 	
 //	@RequestMapping(value="/memberLogin.do", method=RequestMethod.GET)

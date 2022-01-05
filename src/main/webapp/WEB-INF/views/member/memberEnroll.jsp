@@ -116,7 +116,7 @@ $(id).keyup((e) => {
 	}
 	
 	$.ajax({
-		url: "${pageContext.request.contextPath}/member/checkIdDuplicate2.do",
+		url: "${pageContext.request.contextPath}/member/checkIdDuplicate3.do",
 		data: {
 			id: idVal
 		},
