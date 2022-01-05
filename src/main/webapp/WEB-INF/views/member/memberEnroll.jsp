@@ -14,13 +14,18 @@
 			<tr>
 				<th>아이디</th>
 				<td>
-					<input type="text" 
-						   class="form-control" 
-						   placeholder="4글자이상"
-						   name="id" 
-						   id="id"
-						   value="honggd"
-						   required>
+					<div id="memberId-container">
+						<input type="text" 
+							   class="form-control" 
+							   placeholder="4글자이상"
+							   name="id" 
+							   id="id"
+							   value="honggd"
+							   required>
+						<span class="guide ok">이 아이디는 사용가능합니다.</span>
+						<span class="guide error">이 아이디는 사용할 수 없습니다.</span>
+						<input type="hidden" id="idValid" value="0"/>
+					</div>
 				</td>
 			</tr>
 			<tr>
@@ -94,6 +99,45 @@
 	</form>
 </div>
 <script>
+
+/**
+ * 아이디 중복 검사
+ */
+$(id).keyup((e) => {
+	const idVal = $(e.target).val();
+	const $error = $(".guide.error");
+	const $ok = $(".guide.ok");
+	const $idValid = $(idValid);
+	
+	if(idVal.length < 4) {
+		$(".guide").hide();
+		$idValid.val(0); // 아이디를 다시 작성하는 경우 대비
+		return;
+	}
+	
+	$.ajax({
+		url: "${pageContext.request.contextPath}/member/checkIdDuplicate3.do",
+		data: {
+			id: idVal
+		},
+		success(resp) {
+			console.log(resp);
+			const {available} = resp;
+			if(available) {
+				$error.hide();
+				$ok.show();
+				$idValid.val(1);
+			} else {
+				$error.show();
+				$ok.hide();
+				$idValid.val(0);
+			}
+			
+		},
+		error: console.log
+	});
+	
+});
 	
 $("#passwordCheck").blur(function(){
 	const $password = $(password);

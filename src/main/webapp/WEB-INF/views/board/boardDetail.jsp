@@ -22,13 +22,27 @@ div#board-container label.custom-file-label{text-align:left;}
 		   value="${board.memberId}" readonly required>
 
 	<c:forEach items="${board.attachments}" var="attach" varStatus="vs">
-	<button type="button" 
+<%-- 
+		<a href="${pageContext.request.contextPath}/resources/upload/board/${attach.renamedFilename}"
+			role="button" 
+			class="btn btn-outline-success btn-block"
+			download="${attach.originalFilename}">
+			첨부파일${vs.count} - ${attach.originalFilename}
+		</a>
+ --%>
+		<a href="${pageContext.request.contextPath}/board/fileDownload.do?no=${attach.no}"
+			role="button" 
 			class="btn btn-outline-success btn-block">
-	 		첨부파일${vs.count} - ${attach.originalFilename}
-	</button>
+			첨부파일${vs.count} - ${attach.originalFilename}
+		</a>
 	</c:forEach>
+	<a href="${pageContext.request.contextPath}/board/urlResource.do"
+		role="button" 
+		class="btn btn-outline-success btn-block">
+		UrlResource 확인
+	</a>
 	
-    <textarea class="form-control" name="content" 
+    <textarea class="form-control mt-3" name="content" 
     		  placeholder="내용" required>${board.content}</textarea>
     <input type="number" class="form-control" name="readCount" title="조회수"
 		   value="${board.readCount}" readonly>
