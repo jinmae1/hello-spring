@@ -3,6 +3,8 @@ package com.kh.spring.member.controller;
 import java.beans.PropertyEditor;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -48,6 +51,26 @@ public class MemberController {
 		model.addAttribute("id", id);
 
 		return "jsonView";
+	}
+
+	/**
+	 * @ResponseBody: 리턴된 자바객체를 그대로 응답메시지에 json문자열로 변환해서 출력 
+	 * - 1. jackson의존
+	 * - 2. RequestMappingHandlerAdapter의 MessageConverters List객체에 jacksonMessageConverter bean이 자동 등록
+	 * <annotation-driven />에 의해 자동처리
+	 */
+	@GetMapping("/checkIdDuplicate2.do")
+	@ResponseBody
+	public Map<String, Object> checkIdDuplicate2(@RequestParam String id) {
+		Member member = memberService.selectOneMember(id);
+		boolean available = (member == null);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("id",  id);
+		map.put("available", available);
+		map.put("serverTime", System.currentTimeMillis());
+
+		return map;
 	}
 	
 //	@RequestMapping(value="/memberLogin.do", method=RequestMethod.GET)
