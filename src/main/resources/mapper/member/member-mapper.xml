@@ -29,5 +29,14 @@
 		where id = #{id}
 		order by enroll_date asc
 	</select>
+	
+	<select id="findMemberByName" resultType="member">
+		select
+			*
+		from
+			member
+		where
+			name like '%' || #{query} || '%'
+	</select>
 </mapper>
 
